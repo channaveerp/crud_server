@@ -40,6 +40,22 @@ router.post('/register', async (req, res) => {
 });
 
 // delete users
-router.delete('/delete', async (req, res) => {});
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    // Find the user by ID in the database and delete
+    const deletedUser = await users.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser) {
+      // If the user is not found, return 404
+      return res.status(404).send('User not found');
+    }
+
+    // If the user is found and deleted successfully, return 200
+    res.status(200).send('User deleted successfully');
+  } catch (error) {
+    // Handle server errors
+    res.status(500).json('Server Error');
+  }
+});
 
 module.exports = router;
