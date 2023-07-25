@@ -58,4 +58,9 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
+// edit user
+// router.Edit("/edit",async()=>{
+  
+// })
+
 module.exports = router;

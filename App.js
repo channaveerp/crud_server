@@ -6,10 +6,9 @@ const router = require('./routers/router');
 const cors = require('cors');
 
 const app = express();
-app.use(router);
-
 app.use(express.json());
 app.use(cors());
+app.use(router);
 
 app.get('/', (req, res) => {
   return res.send('Hello World!');
