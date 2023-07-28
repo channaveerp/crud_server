@@ -39,6 +39,20 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// get users
+
+router.get('/getusers', async (req, res) => {
+  try {
+    const getUsersData = await users.find();
+    res
+      .status(200)
+      .json({ data: getUsersData, message: 'User fetched successfully' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json('Server Error');
+  }
+});
+
 // delete users
 router.delete('/delete/:id', async (req, res) => {
   try {
@@ -60,7 +74,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 // edit user
 // router.Edit("/edit",async()=>{
-  
+
 // })
 
 module.exports = router;
