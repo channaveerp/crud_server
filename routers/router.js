@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
       const adduser = new users({
         name,
         email,
-        age,
+        age,  
         phone,
         work,
         address,
@@ -73,8 +73,20 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 // edit user
-// router.Edit("/edit",async()=>{
 
-// })
+router.put('/edit/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updatedUser = req.body;
+    
+    const EditedUsersData = await users.findByIdAndUpdate(userId, updatedUser);
+    if (EditedUsersData) {
+      return res.status(200).send('User data updated successfully');
+    }
+    return res.status(400).send('somethinhg went wrog');
+  } catch (err) {
+    res.status(500).json('Server Error');
+  }
+});
 
 module.exports = router;
